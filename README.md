@@ -3,16 +3,19 @@ This is a short project that automate specific EC2 instances based on EC2 tags
 
 
 ## Table of content Content
-1.**[Project discription](##Project-discription)**<br>
+1.**[Project Discription](#project-discription)**<br>
 
-2.**[Create AWS codecommit repository.](##Create-AWS-codecommit-repository)**<br>
+2.**[Create AWS Codecommit Repository](#create-aws-codecommit-repository)**<br>
 
-3.**[Create AWS IAM Role.](##Create-AWS-IAM-Role)**<br>
+3.**[Create AWS IAM Role](#create-aws-iam-role)**<br>
 
-4.**[Create Lambda Function.](##Create_Lambda_Function)**
+4.**[Create Lambda Functions](#create-lambda-functions)**<br>
 
-5.**[Schedule Lambda Function](##Schedule_Lambda_Function)**
+5.**[Schedule Lambda Function](#schedule-lambda-function)**<br>
+
+
 ## Project discription
+
 This project to use `AWS Backup` service to bakup EC2 instances automatically Every day.
 <br>
 We will Backup only EC2 instances With tag `Backup:true`, Instances with tag `Backup:false` will not be backed up.
@@ -20,6 +23,7 @@ We will Backup only EC2 instances With tag `Backup:true`, Instances with tag `Ba
 There is an AWS codecommit repository contain a JSON file that have a list of EC2 instances IDs and the value of tag `true` or `false`, and any change to this JSON file will automatically update the tags of EC2 instances.
 
 ## Create AWS codecommit repository
+
 Create `AWS codeCommit` repository with name `tagged-instanes`.
 
 To create an AWS codecommit repository you can do it with:
@@ -45,6 +49,7 @@ To create an AWS codecommit repository you can do it with:
     ```
     
 ## Create AWS IAM Role
+
 Two `AWS Lambda` finctions created in this project, we need to give them the right permission to do the job
 
 ### 1- read and tag Role
@@ -103,6 +108,7 @@ Two `AWS Lambda` finctions created in this project, we need to give them the rig
 }
 ```
 ### 3- Attached-backup Role
+
 Last Role that Role will passed from Lambda function to AWS backup.
 
 Create New Role With name **Attached-backup** with policy `AWSBackupServiceRolePolicyForBackup`.
@@ -110,6 +116,8 @@ Create New Role With name **Attached-backup** with policy `AWSBackupServiceRoleP
 
 
 ## Create Lambda Functions
+
+
 ### 1. read and tag Function
 This lambda function Triggered after any modification (after Commit) and read this `instances.json` and Update tags of EC2 instances.
  - Create Lambda function and copy the code from `read-tag.py`, change `repositoryName` and `filePath` to names that you wrote.
@@ -122,6 +130,7 @@ This lambda function creates backup of EC2 instances based on its tags
  - Attach `backup-ec2` Role to this function.
 
 ## Schedule Lambda Function
+
 **Backup EC2** Lambda Function will invoked once every day.
 1. create **AWS eventBridge** rule to schedule cron job to run every day.
 
@@ -136,4 +145,3 @@ Using AWS CLI:
 ```
 aws events put-targets --rule DailyLambdaJob --targets "Id"="1","Arn"="Lambda function ARN"
 ```
-
