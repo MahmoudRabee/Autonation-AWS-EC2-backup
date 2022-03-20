@@ -9,8 +9,9 @@ This is a short project that automate specific EC2 instances based on EC2 tags
 
 3.**[Create AWS IAM Role.](##Create-AWS-IAM-Role)**<br>
 
-4.**[Create Lambda Function.](Create_Lambda_Function)**
+4.**[Create Lambda Function.](##Create_Lambda_Function)**
 
+5.**[Schedule Lambda Function](##Schedule_Lambda_Function)**
 ## Project discription
 This project to use `AWS Backup` service to bakup EC2 instances automatically Every day.
 <br>
