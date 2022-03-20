@@ -3,15 +3,15 @@ This is a short project that automate specific EC2 instances based on EC2 tags
 
 
 ## Table of content Content
-1.**[Project Discription](#project-discription)**<br>
+**1.[Project Discription](#project-discription)**<br>
 
-2.**[Create AWS Codecommit Repository](#create-aws-codecommit-repository)**<br>
+**2.[Create AWS Codecommit Repository](#create-aws-codecommit-repository)**<br>
 
-3.**[Create AWS IAM Role](#create-aws-iam-role)**<br>
+**3.[Create AWS IAM Role](#create-aws-iam-role)**<br>
 
-4.**[Create Lambda Functions](#create-lambda-functions)**<br>
+**4.[Create Lambda Functions](#create-lambda-functions)**<br>
 
-5.**[Schedule Lambda Function](#schedule-lambda-function)**<br>
+**5.[Schedule Lambda Function](#schedule-lambda-function)**<br>
 
 
 ## Project discription
