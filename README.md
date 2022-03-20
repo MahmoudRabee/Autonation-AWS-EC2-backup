@@ -35,7 +35,7 @@ To create an AWS codecommit repository you can do it with:
     ``` 
     aws configure
     ```
-    * specify the name of your repository-I'll write tagged-instanes-and discription for it and run this command:
+    * specify the name of your repository-I'll name it `tagged-instanes` and discription for it and run this command:
     
     
     ```
@@ -53,7 +53,7 @@ To create an AWS codecommit repository you can do it with:
 Two `AWS Lambda` finctions created in this project, we need to give them the right permission to do the job
 
 ### 1- read and tag Role
-* First Role attached to The `Lambda` Function that read`instances.json` file and update EC2 tags. so we need two policy:
+* First Role attached to The `Lambda` Function that read `instances.json` file and update EC2 tags. so we need two policy:
 1. **codecommit GetFile** : to read file from codecommit repo.
 
 2. **ec2 CreateTags and list instances** : to create or update tag of EC2 instances.
@@ -80,7 +80,7 @@ Two `AWS Lambda` finctions created in this project, we need to give them the rig
 ```
 
 ### 2- backup-ec2 Role
-* Second Role attached to The `Lambda` Function that read Tags of all EC2 instances andbackup EC2 instances with With tag `Backup:true` .
+* Second Role attached to The `Lambda` Function that read Tags of all EC2 instances and backup EC2 instances With tag `Backup:true` .
 
  We need three policy:
  1. **EC2 list instances**: list instances to check the tags.
@@ -120,8 +120,8 @@ Create New Role With name **Attached-backup** with policy `AWSBackupServiceRoleP
 
 ### 1. read and tag Function
 This lambda function Triggered after any modification (after Commit) and read this `instances.json` and Update tags of EC2 instances.
- - Create Lambda function and copy the code from `read-tag.py`, change `repositoryName` and `filePath` to names that you wrote.
- - Attach `read-tag-ec2` Role to this function,change `ResourceArn` and `IamRoleArn` to valid value.
+ - Create Lambda function and copy the code from `read-tag.py`, Change `repositoryName` and `filePath` to names that you wrote.
+ - Attach `read-tag-ec2` Role to this function, Change `ResourceArn` and `IamRoleArn` to valid value.
  - Create an AWS CodeCommit trigger for an AWS Lambda function. **Example:** [click here](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-notify-lambda.html)
 
 ### 2. Backup EC2 Function
@@ -132,7 +132,7 @@ This lambda function creates backup of EC2 instances based on its tags
 ## Schedule Lambda Function
 
 **Backup EC2** Lambda Function will invoked once every day.
-1. create **AWS eventBridge** rule to schedule cron job to run every day.
+1. create **AWS eventBridge** rule to schedule cron job to run every day with name: **runEveryDay**.
 
 Using AWS CLI:
 ```  
